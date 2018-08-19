@@ -138,3 +138,12 @@ $.ajax({
 }); 
 
 }
+
+$(document).on("click", "#submit", function (event) {
+    event.preventDefault();
+    $("#name").val("");
+    $("#email").val("");
+    $("#company").val("");
+    $("#message").val("");
+});
+
