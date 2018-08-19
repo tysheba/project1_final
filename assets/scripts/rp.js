@@ -2,14 +2,17 @@
 var song = "";
 var artist = '';
 $(document).on("click", "#search", function (event) {
-     song = $("#song-input").val().trim();
-     artist = $("#artist-input").val().trim();
+    $(".fa").removeClass('checked');
+    $("#rated").text("Rate this video");
+    song = $("#song-input").val().trim();
+    artist = $("#artist-input").val().trim();
     event.preventDefault();
     console.log("button clicked");
     console.log(song);
     console.log(artist);
     getLyrics();
     getYTVideo ();
+    $("#eventsdata").empty();
     showEvents ();
 });
 
@@ -78,6 +81,7 @@ $.ajax({
     var videoId2 = data.items[1].id.videoId;
     var videoId3 = data.items[2].id.videoId;
 
+    $('.top-video').text("Other Top Videos for " + artist)
     $(".player").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '"frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>')
     $(".topVideo1").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId2 + '"frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>')
     $(".topVideo2").html('<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId3 + '"frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>')
@@ -105,19 +109,21 @@ $.ajax({
     method: "GET",
       
 }).then(function (response) {
+    $("#upcoming-events").text("Upcoming Events for artist "+ artist);
     var ticketMasterEvents = JSON.stringify(response)
     console.log(response);
     console.log(response._embedded.events);
     var events = response._embedded.events;
     for (var i=0; i < events.length; i++) {
-        console.log(events[i].name);
+        // console.log(events[i].name);
         var eName = events[i].name
         var eLocation = events[i]._embedded.venue[0].name + " " + events[i]._embedded.venue[0].city.name + ", " + events[i]._embedded.venue[0].state.stateCode;
         var eDate = events[i].dates.start.dateTime;
         var eDatef = moment(eDate).format('llll')
-        var $button = $("<button>").text("More Info")
-        var eventLink = events[i].eventURL
-        var eInfo = $button;
+        var eventLink = "https://www.ticketmaster.com/" + events[i]._embedded.attractions[0].url;
+        var $button = $("<button>").html('<a target = "_blank" href='+ eventLink+ '>More Info </a>');
+        // var eInfo = $button.attr("href",eventLink);
+        var eInfo = $button.addClass("btn");
         console.log(eventLink);
         var newRow = $("<tr>").append(
             $("<td>").text(eName),
