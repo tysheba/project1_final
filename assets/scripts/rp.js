@@ -191,6 +191,25 @@ $(document).on("click", "#submit", function (event) {
     $("#email").val("");
     $("#company").val("");
     $("#message").val("");
+
+    // Alert submission received with a modal
+    // When the user clicks the button, open the modal
+    // Get the <span> element that closes the modal
+    var modal = $('#myModal');
+    var span = $(".close")[0];
+    modal.css("display", "block");
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.css("display", "none");
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.css("display", "none");
+        }
+    }
 });
 
 // Collect review data into Firebase
@@ -231,6 +250,7 @@ $(document).on("click", "#submitReview", function (event) {
     //Clear comment box
     $("#review").val("");
 
+
     //Display comments after review is submitted
     // 3. Create Firebase event for adding a row in the html when a user adds an entry
     // Since multiple listeners may be attached the firebase "on' event, on page load or reauthentication etc.
@@ -248,8 +268,8 @@ $(document).on("click", "#submitReview", function (event) {
 
         //create paragraph to display comment
         var $p = $("<p>").addClass("savedReviews");
-        var displayComment = $p.text("Song: " + songName + " by " + artistName + " was rated " + rating + 
-        " stars with the following review comment: " + comment )
+        var displayComment = $p.text("Song: " + songName + " by " + artistName + " was rated " + rating +
+            " stars with the following review comment: " + comment)
 
         // clear contents and hide comment box then replace with display comment
         $(".comment-box").hide();
@@ -257,7 +277,7 @@ $(document).on("click", "#submitReview", function (event) {
 
 
 
-        
+
 
 
     });
@@ -265,21 +285,4 @@ $(document).on("click", "#submitReview", function (event) {
 
 });
 
-// Alert submission received with a modal
-        // When the user clicks the button, open the modal
-        // Get the <span> element that closes the modal
-        // var modal = $('#myModal');
-        // var span = $(".close")[0];
-        // modal.style.display = "block";
 
-        // // When the user clicks on <span> (x), close the modal
-        // span.onclick = function () {
-        //     modal.style.display = "none";
-        // }
-
-        // // When the user clicks anywhere outside of the modal, close it
-        // window.onclick = function (event) {
-        //     if (event.target == modal) {
-        //         modal.style.display = "none";
-        //     }
-        // }
