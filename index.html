@@ -2,9 +2,10 @@
 <html lang="en">
 
 <head>
-  <title>Rotten Potatoes | Official Website</title>
-  <meta charset="UTF-8" />
+  <title>Rotten Potatoes</title>
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel=rel="shortcut icon" href="assets/images/favicon.ico" />
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" />
   <link rel="stylesheet" href="assets/bootstrap/css/rating.css" />
   <!-- boostrap -->
@@ -28,7 +29,7 @@
             <a class="navbar-brand" href="#home">
 
               <h2 class="bgcolor  animated fadeInUpBig">
-                <img src="assets/images/potato.png" height="30" alt="logo" /> Rotten Potatoes</h2>
+                <img src="assets/images/potato.png" height="30" alt="logo"/> Rotten Potatoes</h2>
               <br>
               <!-- #Logo Ends -->
 
@@ -96,8 +97,9 @@
             </form>
           </div>
         </div>
-        <div id="ratings" class="col-sm-3 col-xs-12" style="left: 20px;">
+        <div id="ratings" class="col-sm-3 col-xs-12" style="float: right; background-color: transparent; margin:100px;">
           <span class="star-heading">User Rating</span>
+          
           <ul>
             <li class="fa fa-star checked" data-value='1'></li>
             <li class="fa fa-star checked"data-value='2'></li>
@@ -106,6 +108,16 @@
             <li class="fa fa-star "data-value='5'></li>
           </ul>
           <p id="rated">This video is rated 4 stars</p>
+          <div class="form-group">
+    <label for="exampleFormControlTextarea1">Post a review</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 150px; width:350px;"></textarea>
+    
+  </div>
+  <button type="submit" id="submit" style="background-color:#f2ab00; border-radius:5px; width: 350px;">Submit</button>
+          <!-- <p>
+              <label>Comment</label>
+              <textarea name="message" rows="5" id="message"></textarea>
+            </p> -->
         </div>
       </div>
 
@@ -151,7 +163,7 @@
                 <div class="albumdetail">
                   <h5 id="vName1"></h5>
                   <a href="#" class="listen" data-toggle="modal" data-target="#albumdetail">
-                    <span class="glyphicon glyphicon-headphones"></span> Watch Vido</a>
+                    <span class="glyphicon glyphicon-headphones"></span> Watch Video</a>
                 </div>
               </div>
             </div>
@@ -274,7 +286,7 @@
   <!-- Footer Starts -->
   <div id="footer">
     <div class="container" style="font-size: 1.5em;">
-      Copyright&copy; Lovelace Group 2018
+      Copyright&copy; Team Lovelace 2018
       <a href="https://github.com/tysheba/project1_final" class="fab fa-github"></a>
 
 
