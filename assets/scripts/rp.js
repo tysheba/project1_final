@@ -52,6 +52,28 @@ $(document).ready(function () {
 var song = "";
 var artist = '';
 $(document).on("click", "#search", function (event) {
+    if (!song || !artist) {
+    // Alert if song or artist is blank
+    // When the user clicks the button, open the modal
+    // Get the <span> element that closes the modal
+    var modal = $('#myModal');
+    var span = $(".close")[0];
+    modal.css("display", "block");
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.css("display", "none");
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.css("display", "none");
+        }
+    }
+    }
+
+
     $(".fa").removeClass('checked');
     $("#rated").text("Rate this video");
     song = $("#song-input").val().trim();
@@ -67,7 +89,7 @@ $(document).on("click", "#search", function (event) {
     $(".comment-box").show();
     $(".savedReviews").hide();
 });
-
+// The first API is used to get a track id based on artist name and song. Track ID is required to get lyrics.
 function getLyrics() {
     var queryURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_track=" + song + "&q_artist=" + artist + "&quorum_factor=1&apikey=cad5fbf7afb8c5ce846d140b38ac51ef"
 
@@ -195,8 +217,8 @@ $(document).on("click", "#submit", function (event) {
     // Alert submission received with a modal
     // When the user clicks the button, open the modal
     // Get the <span> element that closes the modal
-    var modal = $('#myModal');
-    var span = $(".close")[0];
+    var modal = $('#myModal2');
+    var span = $(".close2")[0];
     modal.css("display", "block");
 
     // When the user clicks on <span> (x), close the modal
@@ -257,7 +279,8 @@ $(document).on("click", "#submitReview", function (event) {
     // We must first remove the existing listener before attaching new listener.
     // In firebase call off() event before on() event to fix this.
     database.ref().off();
-    database.ref().on("child_added", function (snap) {
+    database.ref().orderByChild('timeCreated').limitToLast(8).on("child_added", function (snap) {
+        
         console.log(snap.val());
 
         // Store everything into a variable.
@@ -268,8 +291,8 @@ $(document).on("click", "#submitReview", function (event) {
 
         //create paragraph to display comment
         var $p = $("<p>").addClass("savedReviews");
-        var displayComment = $p.text("Song: " + songName + " by " + artistName + " was rated " + rating +
-            " stars with the following review comment: " + comment)
+        var displayComment = $p.html("Song:<em>  " + songName + "</em> by <em>" + artistName + "</em> was rated <u>" + rating +
+            " stars</u> with the following review <em>comment:</em> " + comment)
 
         // clear contents and hide comment box then replace with display comment
         $(".comment-box").hide();
