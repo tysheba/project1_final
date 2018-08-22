@@ -52,7 +52,9 @@ $(document).ready(function () {
 var song = "";
 var artist = '';
 $(document).on("click", "#search", function (event) {
-    if (!song || !artist) {
+    song = $("#song-input").val().trim();
+    artist = $("#artist-input").val().trim();
+    if (!song && !artist) {
     // Alert if song or artist is blank
     // When the user clicks the button, open the modal
     // Get the <span> element that closes the modal
@@ -76,8 +78,6 @@ $(document).on("click", "#search", function (event) {
 
     $(".fa").removeClass('checked');
     $("#rated").text("Rate this video");
-    song = $("#song-input").val().trim();
-    artist = $("#artist-input").val().trim();
     event.preventDefault();
     console.log("button clicked");
     console.log(song);
@@ -207,8 +207,7 @@ function showEvents() {
 
 }
 //Clear contact form after submit
-$(document).on("click", "#submit", function (event) {
-    event.preventDefault();
+function clearForm (event) {
     $("#name").val("");
     $("#email").val("");
     $("#company").val("");
@@ -232,7 +231,7 @@ $(document).on("click", "#submit", function (event) {
             modal.css("display", "none");
         }
     }
-});
+};
 
 // Collect review data into Firebase
 // Initialize Firebase
@@ -297,15 +296,39 @@ $(document).on("click", "#submitReview", function (event) {
         // clear contents and hide comment box then replace with display comment
         $(".comment-box").hide();
         $(".comments").append(displayComment);
-
-
-
-
-
-
+  
     });
-
 
 });
 
+// form validation
+function validateForm() {
+    var x = document.forms["contactForm"]["fname"].value;
+    if (x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+}
 
+// Button for submitting Contact Info
+
+$(document).on("click", "#submit", function (event) {
+    
+
+    var name = $("#name").val().trim();
+    var email = $("#email").val().trim();
+    var favArtist = $("#company").val().trim();
+    var message = $("#message").val().trim();
+
+    // Creates local "temporary" object for holding comments
+    contacts = {
+        name: name,
+        email: email,
+        favArtist: favArtist,
+        message: message
+    };
+    database.ref().push(contacts);
+    console.log(contacts);
+    clearForm ();
+
+});
