@@ -11,3 +11,5 @@ Creating a central location for fans to keep up with their favorite aritsts with
 
 Technologies used
 Firebase, Youtube API, bootstrap, javascript, jQuery, AJAX,  Ticket Master API,  MusixMatch API
+
+https://tysheba.github.io/project1_final/

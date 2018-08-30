@@ -116,7 +116,7 @@ function getLyrics() {
             // jsonp: "callback"
         }).then(function (response) {
             console.log(response);
-            var lyrics = response.message.body.lyrics.lyrics_body
+            var lyrics = JSON.stringify(response.message.body.lyrics.lyrics_body, 2, null);
 
             if (lyrics == undefined) {
                 $("#showlyrics").html("<h4> No lyrics available for this song</h4> ");
