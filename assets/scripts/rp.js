@@ -278,7 +278,7 @@ $(document).on("click", "#submitReview", function (event) {
     // We must first remove the existing listener before attaching new listener.
     // In firebase call off() event before on() event to fix this.
     database.ref().off();
-    database.ref().orderByChild('timeCreated').limitToLast(8).on("child_added", function (snap) {
+    database.ref().orderByChild('timeCreated').limitToLast(5).on("child_added", function (snap) {
         
         console.log(snap.val());
 
@@ -327,7 +327,7 @@ $(document).on("click", "#submit", function (event) {
         favArtist: favArtist,
         message: message
     };
-    database.ref().push(contacts);
+    // database.ref().push(contacts);
     console.log(contacts);
     clearForm ();
 
